@@ -78,7 +78,7 @@ export default function Home() {
                             humor, I think you&apos;ll get a good kick out of some of my posts.
                         </p>
                         <p className="mb-0">
-                            For example, my latest post, as of the writing of this, is about{" "}
+                            For example, one of my favorite posts I wrote is about{" "}
                             <Glimpse
                                 href="https://satire.zytronium.dev/post/i-am-going-to-program-a-fighter-jet"
                                 className="link"

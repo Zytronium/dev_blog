@@ -20,12 +20,12 @@
 
 ## Goals
 **June 11**:
+- Create a nav bar
 - Create a Neon Postgres database and link it to the website
 - Write an API route to create a new blog post
-- Create a page that lets you test the API route.
 
 **June 12**:
-- Turn the API tester page into a blog post writing page. Use the markdown editor component from the React component library being used
+- Create the blog post writing page and have it use the new API route. Use the markdown editor component from the React component library being used
 - Make the new post page admin-only/password-protected
 
 **June 13**:
