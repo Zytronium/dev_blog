@@ -17,7 +17,13 @@
   --secondary-lighter: #9f43fa; /* violet-purple */
   --accent-lighter:    #f64e81; /* electric pink */
 
-  --secondary-bright: #b56aff; /* even brighter variant for better readability on dark background */
+  --primary-bright:   #79d6ff; /* light blue */
+  --secondary-bright: #b971ff; /* violet-purple */
+  --accent-bright:    #ff779f; /* electric pink */
+
+  --primary-pastel: #a0e2ff; /* light blue */
+  --secondary-pastel: #d4a8ff; /* violet-purple */
+  --accent-pastel: #ffa4c0; /* electric pink */
 
   --primary-muted:   #83b2c6; /* light blue */
   --secondary-muted: #9f73c9; /* violet-purple */
@@ -66,7 +72,12 @@
   --color-primary-lighter:   var(--primary-lighter);
   --color-secondary-lighter: var(--secondary-lighter);
   --color-accent-lighter:  var(--accent-lighter);
+  --color-primary-bright:  var(--primary-bright);
   --color-secondary-bright:  var(--secondary-bright);
+  --color-accent-bright:  var(--accent-bright);
+  --color-primary-pastel:  var(--primary-pastel);
+  --color-secondary-pastel:  var(--secondary-pastel);
+  --color-accent-pastel:  var(--accent-pastel);
   --color-primary-muted:     var(--primary-muted);
   --color-secondary-muted:   var(--secondary-muted);
   --color-accent-muted:    var(--accent-muted);
@@ -166,4 +177,36 @@ body {
   html {
     @apply font-sans;
  }
+}
+
+.h1 {
+  @apply font-['Aquire'] text-6xl md:text-7xl lg:text-8xl font-bold text-primary drop-shadow-sm mt-6 mb-3;
+}
+
+.h2 {
+  @apply font-['Aquire'] text-3xl md:text-4xl lg:text-5xl font-bold text-primary-lighter drop-shadow-sm mt-6 mb-2;
+}
+
+.h3 {
+  @apply font-['Aquire'] text-xl md:text-2xl lg:text-3xl font-bold text-primary-bright drop-shadow-sm mt-5 mb-1;
+}
+
+.h4 {
+  @apply font-['Aquire'] text-lg md:text-xl lg:text-2xl font-bold text-primary-pastel drop-shadow-sm mt-3 mb-1;
+}
+
+.h5 {
+  @apply font-['Aquire'] text-base lg:text-lg font-bold text-foreground drop-shadow-sm mt-2;
+}
+
+.h6 {
+  @apply text-xs text-muted-foreground;
+}
+
+.link {
+  @apply text-secondary-bright hover:text-secondary-bright/80 hover:underline;
+}
+
+p {
+  @apply mb-4;
 }

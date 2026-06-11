@@ -70,3 +70,14 @@ You may notice I have two cursors in this screenshot. That's quite unusual. I ac
 gives you 2 cursors controlled by 2 physical mice. It only works on Linux with Wayland though. My next blog post will
 likely be about that. It's pretty useless, but fun to mess around with. Imagine using this in public. People would be so
 confused.
+
+Time to add a home page. I sketched out a rough layout for the website and the home page. It'll have an About Me section,
+Recent Posts carousel, and a section displaying 3 of my other primary websites (zytronium.dev, satire.zytronium.dev,
+and webworks.zytronium.dev). I'll also add a section for some of my social media links. 
+
+I've finished my about me section, but with only basic styling, it doesn't look great.
+![Screenshot of the website home page](/readme-assets/unstyled_home_page.png)
+
+Before I move on, I should add some styling to make this look premium. Unforunately, I gave in to AI and had some
+assistence styling the page, however, I think it turned out quite well after a bit of tweaking.
+![Screenshot of the website home page with styling](/readme-assets/styled_home_page.png)
