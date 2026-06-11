@@ -20,7 +20,7 @@ can be easily integreted into a Next.js app on Vercel, which is where I'll be ho
 work on the website...
 
 As I write this paragraph, I'm setting up the base of the website, undoing the Next.js template and selecting my desired 
-fonts. For default text, I chose Gltp Starion, a somewhat futuristic but ledgible font that I use as my system font on 
+fonts. For default text, I chose Gltp Starion, a somewhat futuristic but legible font that I use as my system font on 
 my computer. For monospace/code blocks, I chose Victor Mono, which is also a somewhat futuristic font that I use in my
 IDE. For titles, I chose Aquire, which isn't free for commercial use, so this is somewhat in a legal gray zone, but I 
 plan to purchase a license for it anyway, as I'm using it in my WIP website that markets myself as a freelancing web 
@@ -79,5 +79,15 @@ I've finished my about me section, but with only basic styling, it doesn't look 
 ![Screenshot of the website home page](/readme-assets/unstyled_home_page.png)
 
 Before I move on, I should add some styling to make this look premium. Unforunately, I gave in to AI and had some
-assistence styling the page, however, I think it turned out quite well after a bit of tweaking.
+assistance styling the page, however, I think it turned out quite well after a bit of tweaking.
 ![Screenshot of the website home page with styling](/readme-assets/styled_home_page.png)
+
+Before I can add the "Recent Posts" section of my website, I need to actually allow for the creation of posts and add a
+place to browse posts. I also plan to add "notes," which are quick updates I write every now and then instead of full
+posts.
+
+---
+
+It is now the next day. I made a lot less progress yesterday than expected. I've put together some progress goals for
+the next few days that seem reasonable assuming I work on this every day, which I probably won't. I'll paste those goals
+in a new file, [GOALS.md](GOALS.md).
