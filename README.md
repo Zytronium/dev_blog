@@ -91,3 +91,10 @@ posts.
 It is now the next day. I made a lot less progress yesterday than expected. I've put together some progress goals for
 the next few days that seem reasonable assuming I work on this every day, which I probably won't. I'll paste those goals
 in a new file, [GOALS.md](GOALS.md).
+
+---
+
+Yet another day has passed. I got practically nothing done yesterday due to a busy schedule. However, I made
+a ton of progress today, but only because I gave in and used AI to help me speed it up and style it better. I was
+going to make this readme my first dev blog on the website. However, since I'm not proud that I ended up using as much AI
+as I did, I'm gonna keep this blog post hidden in my GitHub repo, which I may or may not keep public.
