@@ -6,13 +6,14 @@ import Image from "next/image";
 interface ZoomableImageProps {
     src: string;
     alt: string;
-    size: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "full";
+    size: "auto" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "full";
     height: number;
     width: number;
     rounded?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full";
 }
 
 const sizeMap = {
+    auto: "w-full sm:w-auto sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl",
     xs: "w-80",
     sm: "w-96",
     md: "w-128",
