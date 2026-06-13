@@ -89,6 +89,10 @@ type SaveDraftResult =
     | { success: true; id: string }
     | { success: false; error: string };
 
+type PublishPostResult =
+    | { success: true }
+    | { success: false; error: string };
+
 /**
  * Upsert a post draft. Creates a new row when `id` is null, updates
  * the existing row otherwise. Returns the post id on success.
@@ -152,6 +156,32 @@ type PostDraft = {
     updatedAt: Date | string;
     createdAt: Date | string;
 };
+
+/**
+ * Publish a post by id. Sets status to "published" and updates the timestamp.
+ */
+export async function publishPost(id: string): Promise<PublishPostResult> {
+    try {
+        await assertAdmin();
+
+        const now = new Date();
+        await db
+            .update(posts)
+            .set({
+                status: "published",
+                updatedAt: now,
+            })
+            .where(eq(posts.id, id));
+
+        return {success: true};
+    } catch (error) {
+        console.error("[publishPost]", error);
+        return {
+            success: false,
+            error: error instanceof Error ? error.message : "Unknown error",
+        };
+    }
+}
 
 /**
  * Fetch a published post by slug for the public post page.

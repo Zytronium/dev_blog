@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { savePostDraft, getPostDraft, listPostDrafts } from "@/app/actions/posts";
+import {savePostDraft, getPostDraft, listPostDrafts, publishPost} from "@/app/actions/posts";
 import {
     ExternalLinkIcon, SaveIcon, XIcon, EyeIcon,
     Loader2Icon, CheckIcon, FolderOpenIcon, ClockIcon,
@@ -161,6 +161,25 @@ function NewPostInner() {
     const handleManualSave = () => {
         if (debounceRef.current) clearTimeout(debounceRef.current);
         saveToDatabase({ title, slug, excerpt, content, tags, postId });
+    };
+
+    const handlePublish = async () => {
+        if (!postId || !title || !slug || !content.trim()) return;
+        setSaveStatus("saving");
+        try {
+            const result = await publishPost(postId);
+            if (result.success) {
+                setSaveStatus("saved");
+                setLastSaved(new Date());
+                setTimeout(() => {
+                    router.push(`/post/${slug}`);
+                }, 500);
+            } else {
+                setSaveStatus("error");
+            }
+        } catch {
+            setSaveStatus("error");
+        }
     };
 
     const openDraftsDialog = async () => {
@@ -413,7 +432,8 @@ function NewPostInner() {
                     <Button
                         size="sm"
                         className="gap-2 bg-primary text-primary-foreground hover:bg-primary-darker"
-                        disabled={!title || !slug || !content.trim()}
+                        disabled={!title || !slug || !content.trim() || !postId || saveStatus === "saving"}
+                        onClick={handlePublish}
                     >
                         Publish post
                     </Button>
