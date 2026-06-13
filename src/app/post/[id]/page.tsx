@@ -5,10 +5,37 @@ import { ArrowLeftIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
+import { Metadata } from "next";
 
 type PageProps = {
     params: Promise<{ id: string }>;
 };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const { id: slug } = await params;
+    const post = await getPublishedPostBySlug(slug);
+
+    if (!post) {
+        return {
+            title: "Post Not Found",
+        };
+    }
+
+    return {
+        title: post.title,
+        description: post.excerpt,
+        openGraph: {
+            title: post.title,
+            description: post.excerpt || undefined,
+            type: "article",
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: post.title,
+            description: post.excerpt || undefined,
+        },
+    };
+}
 
 export default async function PostPage({ params }: PageProps) {
     const { id: slug } = await params;
