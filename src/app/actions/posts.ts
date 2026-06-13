@@ -28,7 +28,7 @@ import { posts } from "@/lib/db/schema";  // your Drizzle schema
 
 const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle(sql);
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
 
 const ADMIN_USERNAME = "admin";
@@ -152,6 +152,37 @@ type PostDraft = {
     updatedAt: Date | string;
     createdAt: Date | string;
 };
+
+/**
+ * Fetch a published post by slug for the public post page.
+ * Returns null if not found or if the post is still a draft.
+ */
+export async function getPublishedPostBySlug(slug: string): Promise<PostDraft | null> {
+    try {
+        const rows = await db
+            .select()
+            .from(posts)
+            .where(and(eq(posts.slug, slug), eq(posts.status, "published")))
+            .limit(1);
+
+        const row = rows[0];
+        if (!row) return null;
+
+        return {
+            ...row,
+            tags: (() => {
+                try {
+                    return JSON.parse(row.tags ?? "[]");
+                } catch {
+                    return [];
+                }
+            })(),
+        };
+    } catch (error) {
+        console.error("[getPublishedPostBySlug]", error);
+        return null;
+    }
+}
 
 /**
  * Fetch a draft post by slug for the preview page.
