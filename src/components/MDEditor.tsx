@@ -1,6 +1,9 @@
 "use client";
 
-import { Editor, EditorFloatingMenuImageButton, JSONContent } from "@/components/kibo-ui/editor";
+import { Editor, JSONContent } from "@/components/kibo-ui/editor";
+import { useCurrentEditor } from "@tiptap/react";
+import { ImageUploadButton } from "@/components/ImageUploadButton";
+import { ImageIcon } from "lucide-react";
 import {
     EditorBubbleMenu,
     EditorCharacterCount,
@@ -47,6 +50,29 @@ import {
 import { useState } from "react";
 import { Markdown } from "tiptap-markdown";
 
+// Bridges Tiptap editor context (from kibo-ui's EditorProvider) with ImageUploadButton.
+// Must be rendered as a child of EditorProvider to access the editor via context.
+function ImageUploadMenuButton() {
+    const { editor } = useCurrentEditor();
+    return (
+        <ImageUploadButton
+            folder="/blog"
+            onInsert={(url, alt) =>
+                editor?.chain().focus().setImage({ src: url, alt }).run()
+            }
+            trigger={
+                <button
+                    type="button"
+                    title="Insert image"
+                    className="flex items-center justify-center rounded p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                >
+                    <ImageIcon className="h-4 w-4" />
+                </button>
+            }
+        />
+    );
+}
+
 // Types
 export type MDEditorProps = {
     initialContent?: JSONContent | string;
@@ -88,7 +114,7 @@ export default function MDEditor({ initialContent, onContentChange }: MDEditorPr
                 <EditorNodeQuote hideName />
                 <EditorNodeCode hideName />
                 <EditorNodeTable hideName />
-                <EditorFloatingMenuImageButton />
+                <ImageUploadMenuButton />
             </EditorFloatingMenu>
             <EditorBubbleMenu>
                 <EditorSelector title="Text">
