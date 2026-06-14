@@ -189,3 +189,5 @@ export default function Home() {
         </main>
     );
 }
+
+export const dynamic = 'force-dynamic';
