@@ -170,6 +170,7 @@ export async function publishPost(id: string): Promise<PublishPostResult> {
             .set({
                 status: "published",
                 updatedAt: now,
+                publishedAt: now,
             })
             .where(eq(posts.id, id));
 

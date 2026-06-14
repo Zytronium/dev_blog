@@ -8,10 +8,10 @@ const sql = neon(process.env.DATABASE_URL!);
 
 async function getPosts(): Promise<ParsedPost[]> {
     const posts = await sql`
-        SELECT slug, title, excerpt, tags, created_at as "createdAt", status
+        SELECT slug, title, excerpt, tags, published_at as "publishedAt", status
         FROM posts
         WHERE status = 'published'
-        ORDER BY created_at ASC
+        ORDER BY published_at DESC
     `;
     return posts.map(post => ({
         ...post,
@@ -83,11 +83,11 @@ interface PostCardProps {
 }
 
 function PostCard({post}: PostCardProps) {
-    const formattedDate = new Date(post.createdAt).toLocaleDateString('en-US', {
-        year: 'numeric',
+    const formattedDate = post.publishedAt ? post.publishedAt.toLocaleDateString('en-US', {
         month: 'short',
-        day: 'numeric'
-    });
+        day: 'numeric',
+        year: 'numeric',
+    }) : 'N/A';
 
     return (
         <Link

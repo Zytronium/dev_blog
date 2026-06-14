@@ -2,21 +2,22 @@ import Link from 'next/link';
 import { neon } from '@neondatabase/serverless';
 import type { Post } from '@/lib/db/schema';
 
-type ParsedPost = Omit<Post, 'tags'> & { tags: string[] };
+type ParsedPost = Omit<Post, 'tags'> & { tags: string[]; publishedAt: Date };
 
 const sql = neon(process.env.DATABASE_URL!);
 
 async function getRecentPosts(): Promise<ParsedPost[]> {
     const posts = await sql`
-        SELECT slug, title, excerpt, tags, created_at as "createdAt", status
+        SELECT slug, title, excerpt, tags, created_at as "createdAt", published_at as "publishedAt", status
         FROM posts
         WHERE status = 'published'
-        ORDER BY created_at ASC
+        ORDER BY published_at DESC
         LIMIT 3
     `;
     return posts.map(post => ({
         ...post,
         tags: JSON.parse(post.tags as string) as string[],
+        publishedAt: new Date(post.publishedAt as string),
     })) as ParsedPost[];
 }
 
@@ -86,11 +87,11 @@ export default async function RecentPostsWidget() {
 }
 
 function RecentPostRow({ post, index }: { post: ParsedPost; index: number }) {
-    const formattedDate = new Date(post.createdAt).toLocaleDateString('en-US', {
+    const formattedDate = post.publishedAt ? post.publishedAt.toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
         year: 'numeric',
-    });
+    }) : 'N/A';
 
     return (
         <Link

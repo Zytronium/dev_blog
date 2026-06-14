@@ -10,6 +10,7 @@ export const posts = pgTable("posts", {
     status:    text("status").notNull().default("draft"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+    publishedAt: timestamp("published_at", {withTimezone: true}),
 });
 
 export type Post = typeof posts.$inferSelect;
