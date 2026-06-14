@@ -11,7 +11,7 @@ async function getRecentPosts(): Promise<ParsedPost[]> {
         SELECT slug, title, excerpt, tags, created_at as "createdAt", status
         FROM posts
         WHERE status = 'published'
-        ORDER BY created_at DESC
+        ORDER BY created_at ASC
         LIMIT 3
     `;
     return posts.map(post => ({
