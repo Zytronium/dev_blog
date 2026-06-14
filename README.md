@@ -98,3 +98,5 @@ Yet another day has passed. I got practically nothing done yesterday due to a bu
 a ton of progress today, but only because I gave in and used AI to help me speed it up and style it better. I was
 going to make this readme my first dev blog on the website. However, since I'm not proud that I ended up using as much AI
 as I did, I'm gonna keep this blog post hidden in my GitHub repo, which I may or may not keep public.
+
+I will probably not make any more updates to this readme from now on, despite further progress being made.

@@ -26,8 +26,6 @@
 - Make the new post page admin-only/password-protected
 
 **June 13**:
+- Create a new database for images and maybe videos and add an embedded image uploader to the blog post editor
 - Create the /post/\<slug> page that renders a blog post in Markdown formatting
 - Create the browse page that lists all blog posts in chronological order
-
-**June 14**:
-- Create a new database for images and maybe videos and add an embedded image uploader to the blog post editor
