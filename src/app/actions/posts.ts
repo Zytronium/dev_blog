@@ -156,7 +156,7 @@ type PostDraft = {
     status: string;
     updatedAt: Date | string;
     createdAt: Date | string;
-    publishedAt?: Date | string;
+    publishedAt?: Date | string | null;
 };
 
 /**
