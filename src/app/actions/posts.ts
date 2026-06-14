@@ -17,6 +17,7 @@
  *   status     TEXT        -- "draft" | "published"
  *   updated_at TIMESTAMPTZ
  *   created_at TIMESTAMPTZ
+ *   published_at TIMESTAMPTZ -- nullable
  *
  */
 
@@ -155,6 +156,7 @@ type PostDraft = {
     status: string;
     updatedAt: Date | string;
     createdAt: Date | string;
+    publishedAt?: Date | string;
 };
 
 /**

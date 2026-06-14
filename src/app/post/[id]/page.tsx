@@ -39,8 +39,8 @@ export default async function PostPage({ params }: PageProps) {
 
     if (!post) notFound();
 
-    const formattedDate = post.createdAt
-        ? new Date(post.createdAt).toLocaleDateString("en-US", {
+    const formattedDate = post.publishedAt
+        ? new Date(post.publishedAt).toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
             day: "numeric",
