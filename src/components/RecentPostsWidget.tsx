@@ -4,7 +4,7 @@ import type { Post } from '@/lib/db/schema';
 
 type ParsedPost = Omit<Post, 'tags'> & { tags: string[]; publishedAt: Date };
 
-const sql = neon(process.env.DATABASE_URL!);
+const sql = neon(process.env.DATABASE_URL!, { fetchOptions: { cache: 'no-store' } });
 
 async function getRecentPosts(): Promise<ParsedPost[]> {
     const posts = await sql`

@@ -110,7 +110,7 @@ const mdComponents: Components = {
             width={Number(width) || 800}
             height={Number(height) || 600}
             size="full"
-            rounded="md"
+            rounded="lg"
         />
     ),
     table: ({ children }) => (
