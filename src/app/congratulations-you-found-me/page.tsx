@@ -225,7 +225,7 @@ export default function CongratulationsYouFoundMePage() {
                         <TypewriterLine text="> Breach vector: right-click context menu" delay={0} color="rgba(0,244,255,0.5)" />
                         <TypewriterLine text="> Identity: curious human" delay={500} color="rgba(0,244,255,0.5)" />
                         <TypewriterLine text="> Threat level: zero" delay={1000} color="rgba(0,244,255,0.5)" />
-                        <TypewriterLine text="> Clearance: EXPLORER CLASS" delay={1500} color="rgba(200,0,255,0.8)" />
+                        <TypewriterLine text="> Clearance: NONE" delay={1500} color="rgba(200,0,255,0.8)" />
                         <TypewriterLine text="> Welcome to the hidden layer." delay={2100} color="rgba(255,255,255,0.7)" />
                         <TypewriterLine text="> There's absolutely nothing to do here." delay={3500} color="rgba(200,200,200,0.6)" />
                     </div>
