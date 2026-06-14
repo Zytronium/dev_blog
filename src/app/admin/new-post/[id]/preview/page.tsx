@@ -24,6 +24,7 @@ export default async function PreviewPage({ params, searchParams }: PageProps) {
         year: "numeric",
         month: "long",
         day: "numeric",
+        timeZone: 'America/Chicago',
     });
 
     return (

@@ -44,11 +44,13 @@ export default async function PostPage({ params }: PageProps) {
             year: "numeric",
             month: "long",
             day: "numeric",
+            timeZone: 'America/Chicago',
         })
         : new Date().toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
             day: "numeric",
+            timeZone: 'America/Chicago',
         });
 
     return (

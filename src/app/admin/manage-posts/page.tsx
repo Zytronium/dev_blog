@@ -334,7 +334,7 @@ function ManagePostsInner() {
                                         </div>
                                         <span className="shrink-0 text-xs text-muted-foreground pt-0.5">
                                             {new Date(post.publishedAt).toLocaleDateString('en-US', {
-                                                month: 'short', day: 'numeric', year: 'numeric'
+                                                month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/Chicago'
                                             })}
                                         </span>
                                     </button>

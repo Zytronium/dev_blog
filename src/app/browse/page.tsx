@@ -87,6 +87,7 @@ function PostCard({post}: PostCardProps) {
         month: 'short',
         day: 'numeric',
         year: 'numeric',
+        timeZone: 'America/Chicago',
     }) : 'N/A';
 
     return (

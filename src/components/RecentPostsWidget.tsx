@@ -91,6 +91,7 @@ function RecentPostRow({ post, index }: { post: ParsedPost; index: number }) {
         month: 'short',
         day: 'numeric',
         year: 'numeric',
+        timeZone: 'America/Chicago',
     }) : 'N/A';
 
     return (
