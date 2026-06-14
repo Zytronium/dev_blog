@@ -93,7 +93,8 @@ const mdComponents: Components = {
     code: ({ className, children }) => {
         if (className) return <>{children}</>;
         return (
-            <code className="font-['Victor_Mono',monospace] text-sm bg-muted border border-border rounded px-1 py-0.5 text-primary-lighter">
+            <code
+                className="font-['Victor_Mono',monospace] text-[0.875em] bg-muted border border-border rounded px-1 py-0.5 text-primary-lighter">
                 {children}
             </code>
         );
