@@ -68,8 +68,8 @@ function GridBg() {
 
 function CornerAccent({ position }: { position: "tl" | "tr" | "bl" | "br" }) {
     const styles: Record<string, React.CSSProperties> = {
-        tl: { top: 24, left: 24, borderTop: "2px solid", borderLeft: "2px solid" },
-        tr: { top: 24, right: 24, borderTop: "2px solid", borderRight: "2px solid" },
+        tl: {top: 88, left: 24, borderTop: "2px solid", borderLeft: "2px solid"},
+        tr: {top: 88, right: 24, borderTop: "2px solid", borderRight: "2px solid"},
         bl: { bottom: 24, left: 24, borderBottom: "2px solid", borderLeft: "2px solid" },
         br: { bottom: 24, right: 24, borderBottom: "2px solid", borderRight: "2px solid" },
     };
