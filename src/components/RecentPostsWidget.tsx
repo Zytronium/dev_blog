@@ -87,7 +87,7 @@ export default async function RecentPostsWidget() {
 }
 
 function RecentPostRow({ post, index }: { post: ParsedPost; index: number }) {
-    const formattedDate = post.publishedAt ? post.publishedAt.toLocaleDateString('en-US', {
+    const formattedDate = post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
         year: 'numeric',

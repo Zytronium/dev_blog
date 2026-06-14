@@ -83,7 +83,7 @@ interface PostCardProps {
 }
 
 function PostCard({post}: PostCardProps) {
-    const formattedDate = post.publishedAt ? post.publishedAt.toLocaleDateString('en-US', {
+    const formattedDate = post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
         year: 'numeric',
