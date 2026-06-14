@@ -310,3 +310,139 @@ export async function listPostDrafts(): Promise<PostDraftSummary[]> {
         return [];
     }
 }
+
+type PublishedPostSummary = {
+    id: string;
+    title: string;
+    slug: string;
+    publishedAt: Date | string;
+};
+
+/**
+ * List all published posts (id, title, slug, publishedAt) for the manage-posts picker.
+ */
+export async function listPublishedPosts(): Promise<PublishedPostSummary[]> {
+    try {
+        await assertAdmin();
+
+        const rows = await db
+            .select({
+                id: posts.id,
+                title: posts.title,
+                slug: posts.slug,
+                publishedAt: posts.publishedAt,
+            })
+            .from(posts)
+            .where(eq(posts.status, "published"))
+            .orderBy(posts.publishedAt);
+
+        return rows.reverse() as PublishedPostSummary[]; // newest first
+    } catch (error) {
+        console.error("[listPublishedPosts]", error);
+        return [];
+    }
+}
+
+/**
+ * Fetch a single published post by id for the manage-posts editor.
+ * Returns null if not found or not published.
+ */
+export async function getPublishedPost(id: string): Promise<PostDraft | null> {
+    try {
+        await assertAdmin();
+
+        const rows = await db
+            .select()
+            .from(posts)
+            .where(and(eq(posts.id, id), eq(posts.status, "published")))
+            .limit(1);
+
+        const row = rows[0];
+        if (!row) return null;
+
+        return {
+            ...row,
+            tags: (() => {
+                try { return JSON.parse(row.tags ?? "[]"); }
+                catch { return []; }
+            })(),
+        };
+    } catch (error) {
+        console.error("[getPublishedPost]", error);
+        return null;
+    }
+}
+
+type UpdatePostInput = {
+    id: string;
+    title: string;
+    slug: string;
+    excerpt: string;
+    content: string;
+    tags: string[];
+};
+
+type UpdatePostResult =
+    | { success: true }
+    | { success: false; error: string };
+
+/**
+ * Update a published post's content in place. Keeps status as "published".
+ */
+export async function updatePublishedPost(input: UpdatePostInput): Promise<UpdatePostResult> {
+    try {
+        await assertAdmin();
+
+        const now = new Date();
+        await db
+            .update(posts)
+            .set({
+                title: input.title,
+                slug: input.slug,
+                excerpt: input.excerpt,
+                content: input.content,
+                tags: JSON.stringify(input.tags),
+                updatedAt: now,
+            })
+            .where(and(eq(posts.id, input.id), eq(posts.status, "published")));
+
+        return { success: true };
+    } catch (error) {
+        console.error("[updatePublishedPost]", error);
+        return {
+            success: false,
+            error: error instanceof Error ? error.message : "Unknown error",
+        };
+    }
+}
+
+type ArchivePostResult =
+    | { success: true }
+    | { success: false; error: string };
+
+/**
+ * Archive a published post. Sets status to "archived" so it's
+ * unpublished but not deleted.
+ */
+export async function archivePost(id: string): Promise<ArchivePostResult> {
+    try {
+        await assertAdmin();
+
+        const now = new Date();
+        await db
+            .update(posts)
+            .set({
+                status: "archived",
+                updatedAt: now,
+            })
+            .where(and(eq(posts.id, id), eq(posts.status, "published")));
+
+        return { success: true };
+    } catch (error) {
+        console.error("[archivePost]", error);
+        return {
+            success: false,
+            error: error instanceof Error ? error.message : "Unknown error",
+        };
+    }
+}

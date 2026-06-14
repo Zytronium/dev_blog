@@ -63,7 +63,7 @@ function NewPostInner() {
     const [draftsLoading, setDraftsLoading] = useState(false);
 
     // Initial content for the editor when loading a draft
-        const [initialContent, setInitialContent] = useState<string | undefined>(undefined);
+    const [initialContent, setInitialContent] = useState<string | undefined>(undefined);
     const [editorKey, setEditorKey] = useState(0); // bump to remount editor with new content
 
     const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -85,7 +85,7 @@ function NewPostInner() {
             setExcerpt(post.excerpt);
             setContent(post.content);
             setTags(post.tags);
-                setInitialContent(post.content);
+            setInitialContent(post.content);
             setEditorKey(k => k + 1);
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -186,7 +186,8 @@ function NewPostInner() {
         setDraftsOpen(true);
         setDraftsLoading(true);
         const list = await listPostDrafts();
-        setDraftList(list);
+        // Published posts are managed in /admin/manage-posts
+        setDraftList(list.filter(d => d.status !== "published"));
         setDraftsLoading(false);
     };
 
@@ -205,7 +206,7 @@ function NewPostInner() {
             setExcerpt(post.excerpt);
             setContent(post.content);
             setTags(post.tags);
-                setInitialContent(post.content);
+            setInitialContent(post.content);
             setEditorKey(k => k + 1);
         });
     };
@@ -261,36 +262,52 @@ function NewPostInner() {
                                     <Loader2Icon size={16} className="animate-spin" /> Loading drafts…
                                 </div>
                             ) : draftList.length === 0 ? (
-                                <p className="text-muted-foreground text-sm py-6 text-center">No drafts saved yet.</p>
+                                <div className="flex flex-col items-center gap-3 py-6 text-center">
+                                    <p className="text-muted-foreground text-sm">No drafts saved yet.</p>
+                                    <p className="text-muted-foreground text-xs">
+                                        Looking for a published post?{" "}
+                                        <Link href="/admin/manage-posts" className="underline hover:text-primary transition-colors">
+                                            Manage posts
+                                        </Link>
+                                    </p>
+                                </div>
                             ) : (
-                                <ul className="flex flex-col gap-1 max-h-96 overflow-y-auto">
-                                    {draftList.map((draft) => (
-                                        <li key={draft.id}>
-                                            <button
-                                                type="button"
-                                                onClick={() => loadDraft(draft)}
-                                                className="w-full text-left px-3 py-2.5 rounded-md hover:bg-muted transition-colors flex flex-col gap-0.5 group"
-                                            >
+                                <>
+                                    <ul className="flex flex-col gap-1 max-h-96 overflow-y-auto">
+                                        {draftList.map((draft) => (
+                                            <li key={draft.id}>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => loadDraft(draft)}
+                                                    className="w-full text-left px-3 py-2.5 rounded-md hover:bg-muted transition-colors flex flex-col gap-0.5 group"
+                                                >
                                                 <span className="font-medium text-foreground group-hover:text-primary transition-colors">
                                                     {draft.title || <span className="italic text-muted-foreground">Untitled</span>}
                                                 </span>
-                                                <span className="flex items-center gap-2 text-xs text-muted-foreground font-mono">
+                                                    <span className="flex items-center gap-2 text-xs text-muted-foreground font-mono">
                                                     <span>/post/{draft.slug || "—"}</span>
                                                     <span>·</span>
                                                     <span className="flex items-center gap-1">
                                                         <ClockIcon size={10} />
                                                         {new Date(draft.updatedAt).toLocaleString()}
                                                     </span>
-                                                    {draft.status !== "draft" && (
-                                                        <Badge className="text-[10px] py-0 h-4 bg-primary/20 text-primary border-primary/30">
-                                                            {draft.status}
-                                                        </Badge>
-                                                    )}
+                                                        {draft.status !== "draft" && (
+                                                            <Badge className="text-[10px] py-0 h-4 bg-primary/20 text-primary border-primary/30">
+                                                                {draft.status}
+                                                            </Badge>
+                                                        )}
                                                 </span>
-                                            </button>
-                                        </li>
-                                    ))}
-                                </ul>
+                                                </button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <p className="text-xs text-muted-foreground text-center pt-2 border-t border-border mt-1">
+                                        To edit published posts, visit{" "}
+                                        <Link href="/admin/manage-posts" className="underline hover:text-primary transition-colors">
+                                            Manage posts
+                                        </Link>
+                                    </p>
+                                </>
                             )}
                         </DialogContent>
                     </Dialog>
