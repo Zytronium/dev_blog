@@ -177,3 +177,5 @@ function PostCard({post}: PostCardProps) {
         </Link>
     );
 }
+
+export const dynamic = 'force-dynamic';

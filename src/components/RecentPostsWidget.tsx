@@ -178,3 +178,5 @@ function RecentPostRow({ post, index }: { post: ParsedPost; index: number }) {
         </Link>
     );
 }
+
+export const dynamic = 'force-dynamic';
